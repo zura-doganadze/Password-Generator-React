@@ -196,7 +196,12 @@ function App() {
               <label for="symbols">include symbols</label>
             </div>
           </ChackboxContainer>
-          
+          <GenerateButton>
+            <Button>
+              generate
+              <img src={arrowLeft} alt="arrow left icon" />
+            </Button>
+          </GenerateButton>
         </ContentContainer>
       </MainContainer>
     </MainWrapper>
