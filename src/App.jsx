@@ -109,6 +109,27 @@ const Chackbox = styled.input`
   width: 20px;
   height: 20px;
 `;
+
+// button
+
+const GenerateButton = styled.div`
+  width: 100%;
+  border: 1px solid #a4ffaf;
+`;
+const Button = styled.button`
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #a4ffaf;
+  text-transform: uppercase;
+  background-color: inherit;
+  cursor: pointer;
+`;
 function App() {
   const [data, setData] = useState(0);
   return (
@@ -122,7 +143,23 @@ function App() {
             <img src={faRegular} alt="coppied icon" />
           </CopiedContainer>
         </OutputWrapper>
-        
+        <ContentContainer>
+          <CharacterContainer>
+            <CharacterText>
+              <CharacterTitle>character length</CharacterTitle>
+              <CharacterNumber>{data}</CharacterNumber>
+            </CharacterText>
+            <RangeInput
+              type="range"
+              min="0"
+              max="10"
+              step="1"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+            />
+          </CharacterContainer>
+          
+        </ContentContainer>
       </MainContainer>
     </MainWrapper>
   );
