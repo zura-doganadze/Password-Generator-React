@@ -158,6 +158,44 @@ function App() {
               onChange={(e) => setData(e.target.value)}
             />
           </CharacterContainer>
+          <ChackboxContainer>
+            <div>
+              <Chackbox
+                type="checkbox"
+                id="uppercase"
+                name="vehicle1"
+                value="Bike"
+              />
+              <label for="uppercase">include uppercase letters</label>
+            </div>
+            <div>
+              <Chackbox
+                type="checkbox"
+                id="lowercase"
+                name="vehicle1"
+                value="Bike"
+              />
+              <label for="lowercase">include lowercase letters</label>
+            </div>
+            <div>
+              <Chackbox
+                type="checkbox"
+                id="number"
+                name="vehicle1"
+                value="Bike"
+              />
+              <label for="number">include numbers</label>
+            </div>
+            <div>
+              <Chackbox
+                type="checkbox"
+                id="symbols"
+                name="vehicle1"
+                value="Bike"
+              />
+              <label for="symbols">include symbols</label>
+            </div>
+          </ChackboxContainer>
           
         </ContentContainer>
       </MainContainer>
