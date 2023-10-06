@@ -83,8 +83,8 @@ const CharacterNumber = styled.span`
 `;
 const RangeInput = styled.input`
   accent-color: #a4ffaf;
-  cursor: pointer;
   margin-top: 20px;
+  cursor: pointer;
   width: 100%;
 `;
 
@@ -130,74 +130,118 @@ const Button = styled.button`
   background-color: inherit;
   cursor: pointer;
 `;
+
 function App() {
-  const [data, setData] = useState(0);
+  const [range, setRange] = useState(10);
+
+  const [strength, setStrength] = useState(0);
+  const [upperCase, setUpperCase] = useState(false);
+  const [lowerCase, setLowerCase] = useState(false);
+  const [number, setNumber] = useState(false);
+  const [symbol, setSymbol] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const [copiedArray, setCopiedArray] = useState("");
+
+  function handleStrength(event, text) {
+    if (text === "Include Uppercase Letters") {
+      setUpperCase(!upperCase);
+    } else if (text === "Include Lowercase Letters") {
+      setLowerCase(!lowerCase);
+    } else if (text === "Include Numbers") {
+      setNumber(!number);
+    } else {
+      setSymbol(!symbol);
+    }
+
+    if (event.target.checked) {
+      setStrength((prev) => prev + 1);
+    } else {
+      setStrength((prev) => prev - 1);
+    }
+  }
+
+  const datas = [
+    "Include Uppercase Letters",
+    "Include Lowercase Letters",
+    "Include Numbers",
+    "Include Symbols",
+  ];
+
+  function generatePassword() {
+    const upperCaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowerCaseSet = "abcdefghijklmnopqrstuvwxyz";
+    const numberSet = "0123456789";
+    const symbolSet = "@#$%^&*()_+~|}{[]></-=";
+
+    let chars = "";
+    if (upperCase) {
+      chars += upperCaseSet;
+    }
+    if (lowerCase) {
+      chars += lowerCaseSet;
+    }
+    if (number) {
+      chars += numberSet;
+    }
+    if (symbol) {
+      chars += symbolSet;
+    }
+    console.log(chars);
+
+    let newPassword = "";
+    for (let i = 0; i < range; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      newPassword += chars[randomIndex];
+    }
+    setPassword(newPassword);
+  }
   return (
     <MainWrapper>
       <MainContainer>
         <Title>password generator</Title>
         <OutputWrapper>
-          <Output>P4$5W0rD!</Output>
+          <Output>{password}</Output>
           <CopiedContainer>
             <CopiedSpan>copied</CopiedSpan>
-            <img src={faRegular} alt="coppied icon" />
+            <img
+              onClick={() => setCopiedArray(password)}
+              src={faRegular}
+              alt="coppied icon"
+            />
           </CopiedContainer>
         </OutputWrapper>
         <ContentContainer>
           <CharacterContainer>
             <CharacterText>
               <CharacterTitle>character length</CharacterTitle>
-              <CharacterNumber>{data}</CharacterNumber>
+              <CharacterNumber>{range}</CharacterNumber>
             </CharacterText>
             <RangeInput
               type="range"
               min="0"
-              max="10"
+              max="20"
               step="1"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
+              value={range}
+              onChange={(event) => setRange(event.target.value)}
             />
           </CharacterContainer>
           <ChackboxContainer>
-            <div>
-              <Chackbox
-                type="checkbox"
-                id="uppercase"
-                name="vehicle1"
-                value="Bike"
-              />
-              <label for="uppercase">include uppercase letters</label>
-            </div>
-            <div>
-              <Chackbox
-                type="checkbox"
-                id="lowercase"
-                name="vehicle1"
-                value="Bike"
-              />
-              <label for="lowercase">include lowercase letters</label>
-            </div>
-            <div>
-              <Chackbox
-                type="checkbox"
-                id="number"
-                name="vehicle1"
-                value="Bike"
-              />
-              <label for="number">include numbers</label>
-            </div>
-            <div>
-              <Chackbox
-                type="checkbox"
-                id="symbols"
-                name="vehicle1"
-                value="Bike"
-              />
-              <label for="symbols">include symbols</label>
-            </div>
+            {datas.map((text, index) => {
+              return (
+                <div key={index}>
+                  <Chackbox
+                    type="checkbox"
+                    onChange={(event) => handleStrength(event, text)}
+                  />
+                  <label for="uppercase">{text}</label>
+                </div>
+              );
+            })}
           </ChackboxContainer>
+
           <GenerateButton>
-            <Button>
+            <Button onClick={generatePassword}>
               generate
               <img src={arrowLeft} alt="arrow left icon" />
             </Button>
@@ -209,3 +253,4 @@ function App() {
 }
 
 export default App;
+ 
