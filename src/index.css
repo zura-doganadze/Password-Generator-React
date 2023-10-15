@@ -1,14 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Overpass&display=swap");
 body {
   text-align: center;
-  font-family: "Space Mono", monospace;
-}
+  font-family: 'Overpass', sans-serif;}
 #root {
   width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-items: center;
-  background-color:#24232C;
+  background-color: #24232c;
 }
 * {
   margin: 0;

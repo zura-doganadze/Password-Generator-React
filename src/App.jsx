@@ -130,7 +130,34 @@ const Button = styled.button`
   background-color: inherit;
   cursor: pointer;
 `;
-
+const StrongDetail = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 32px;
+  background-color: #24232c;
+  margin-bottom: 32px;
+`;
+const StrongTitle = styled.span`
+  color: var(--Grey, #817d92);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+const Description = styled.span`
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+const StrongLineContainer = styled.div`
+  display: flex;
+  column-gap: 9px;
+`;
+const StrongLine = styled.div`
+  width: 10px;
+  height: 28px;
+  border: 2px solid var(--Almost-White, #e6e5ea);
+`;
 function App() {
   const [range, setRange] = useState(10);
 
@@ -167,6 +194,7 @@ function App() {
     "Include Numbers",
     "Include Symbols",
   ];
+  console.log(strength);
 
   function generatePassword() {
     const upperCaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -177,6 +205,7 @@ function App() {
     let chars = "";
     if (upperCase) {
       chars += upperCaseSet;
+      
     }
     if (lowerCase) {
       chars += lowerCaseSet;
@@ -189,6 +218,8 @@ function App() {
     }
     console.log(chars);
 
+  
+
     let newPassword = "";
     for (let i = 0; i < range; i++) {
       const randomIndex = Math.floor(Math.random() * chars.length);
@@ -199,6 +230,7 @@ function App() {
   return (
     <MainWrapper>
       <MainContainer>
+        
         <Title>password generator</Title>
         <OutputWrapper>
           <Output>{password}</Output>
@@ -239,9 +271,18 @@ function App() {
               );
             })}
           </ChackboxContainer>
-
+          <StrongDetail>
+            <StrongTitle>strength</StrongTitle>
+            <StrongLineContainer>
+              <Description>medium</Description>
+              <StrongLine></StrongLine>
+              <StrongLine></StrongLine>
+              <StrongLine></StrongLine>
+              <StrongLine></StrongLine>
+            </StrongLineContainer>
+          </StrongDetail>
           <GenerateButton>
-            <Button onClick={generatePassword}>
+            <Button onClick={strength == 0 ? {} : generatePassword}>
               generate
               <img src={arrowLeft} alt="arrow left icon" />
             </Button>
@@ -253,4 +294,3 @@ function App() {
 }
 
 export default App;
- 
