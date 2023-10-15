@@ -148,6 +148,7 @@ const Description = styled.span`
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
+  color: #e6e5ea;
 `;
 const StrongLineContainer = styled.div`
   display: flex;
@@ -156,7 +157,7 @@ const StrongLineContainer = styled.div`
 const StrongLine = styled.div`
   width: 10px;
   height: 28px;
-  border: 2px solid var(--Almost-White, #e6e5ea);
+  border: 2px solid #e6e5ea;
 `;
 function App() {
   const [range, setRange] = useState(10);
@@ -169,6 +170,12 @@ function App() {
   const [password, setPassword] = useState("");
 
   const [copiedArray, setCopiedArray] = useState("");
+  //strong
+  const [line1, setline1] = useState("initial");
+  const [line2, setline2] = useState("initial");
+  const [line3, setline3] = useState("initial");
+  const [line4, setline4] = useState("initial");
+  const [strengText, setStrengText] = useState("");
 
   function handleStrength(event, text) {
     if (text === "Include Uppercase Letters") {
@@ -205,7 +212,6 @@ function App() {
     let chars = "";
     if (upperCase) {
       chars += upperCaseSet;
-      
     }
     if (lowerCase) {
       chars += lowerCaseSet;
@@ -218,19 +224,45 @@ function App() {
     }
     console.log(chars);
 
-  
-
     let newPassword = "";
     for (let i = 0; i < range; i++) {
       const randomIndex = Math.floor(Math.random() * chars.length);
       newPassword += chars[randomIndex];
     }
     setPassword(newPassword);
+    strongs();
+  }
+
+  function strongs() {
+    if (strength === 1) {
+      setline1("#F64A4A");
+      setline2("initial");
+      setline3("initial");
+      setline4("initial");
+      setStrengText("TOO WEAK!");
+    } else if (strength === 2) {
+      setline1("#FB7C58");
+      setline2("#FB7C58");
+      setline3("initial");
+      setline4("initial");
+      setStrengText("WEAK");
+    } else if (strength === 3) {
+      setline1("#F8CD65");
+      setline2("#F8CD65");
+      setline3("#F8CD65");
+      setline4("initial");
+      setStrengText("MEDIUM");
+    } else {
+      setline1("#A4FFAF");
+      setline2("#A4FFAF");
+      setline3("#A4FFAF");
+      setline4("#A4FFAF");
+      setStrengText("STRONG");
+    }
   }
   return (
     <MainWrapper>
       <MainContainer>
-        
         <Title>password generator</Title>
         <OutputWrapper>
           <Output>{password}</Output>
@@ -266,7 +298,7 @@ function App() {
                     type="checkbox"
                     onChange={(event) => handleStrength(event, text)}
                   />
-                  <label for="uppercase">{text}</label>
+                  <label htmlFor="uppercase">{text}</label>
                 </div>
               );
             })}
@@ -274,15 +306,15 @@ function App() {
           <StrongDetail>
             <StrongTitle>strength</StrongTitle>
             <StrongLineContainer>
-              <Description>medium</Description>
-              <StrongLine></StrongLine>
-              <StrongLine></StrongLine>
-              <StrongLine></StrongLine>
-              <StrongLine></StrongLine>
+              <Description>{strengText}</Description>
+              <StrongLine style={{ backgroundColor: line1 }}></StrongLine>
+              <StrongLine style={{ backgroundColor: line2 }}></StrongLine>
+              <StrongLine style={{ backgroundColor: line3 }}></StrongLine>
+              <StrongLine style={{ backgroundColor: line4 }}></StrongLine>
             </StrongLineContainer>
           </StrongDetail>
           <GenerateButton>
-            <Button onClick={strength == 0 ? {} : generatePassword}>
+            <Button onClick={strength == 0 ? null : generatePassword}>
               generate
               <img src={arrowLeft} alt="arrow left icon" />
             </Button>
