@@ -230,10 +230,10 @@ function App() {
       newPassword += chars[randomIndex];
     }
     setPassword(newPassword);
-    strongs();
+    teststrongs();
   }
 
-  function strongs() {
+  function teststrongs() {
     if (strength === 1) {
       setline1("#F64A4A");
       setline2("initial");
@@ -293,11 +293,15 @@ function App() {
           <ChackboxContainer>
             {datas.map((text, index) => {
               return (
-                <div key={index}>
-                  <Chackbox
-                    type="checkbox"
-                    onChange={(event) => handleStrength(event, text)}
-                  />
+                <div className="chackWrapper" key={index}>
+                  <div className="chackContainer">
+                    <Chackbox
+                      className="checkbox"
+                      type="checkbox"
+                      onChange={(event) => handleStrength(event, text)}
+                    />
+                    <div className="custom-checkbox"></div>
+                  </div>
                   <label htmlFor="uppercase">{text}</label>
                 </div>
               );
