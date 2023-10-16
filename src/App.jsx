@@ -167,7 +167,7 @@ function App() {
   const [lowerCase, setLowerCase] = useState(false);
   const [number, setNumber] = useState(false);
   const [symbol, setSymbol] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("P4$5W0rD!");
 
   const [copiedArray, setCopiedArray] = useState("");
   //strong
@@ -260,6 +260,20 @@ function App() {
       setStrengText("STRONG");
     }
   }
+
+  //coppy password
+  const copyPassword = () => {
+    const textToCopy = password;
+
+    navigator.clipboard.writeText(textToCopy).then(
+      () => {
+        setCopiedArray(true);
+      },
+      () => {
+        setCopiedArray(false);
+      }
+    );
+  };
   return (
     <MainWrapper>
       <MainContainer>
@@ -267,12 +281,8 @@ function App() {
         <OutputWrapper>
           <Output>{password}</Output>
           <CopiedContainer>
-            <CopiedSpan>copied</CopiedSpan>
-            <img
-              onClick={() => setCopiedArray(password)}
-              src={faRegular}
-              alt="coppied icon"
-            />
+            {copiedArray === true ? <CopiedSpan>copied</CopiedSpan> : null}
+            <img onClick={copyPassword} src={faRegular} alt="copied icon" />
           </CopiedContainer>
         </OutputWrapper>
         <ContentContainer>
