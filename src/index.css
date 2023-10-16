@@ -38,11 +38,13 @@ body {
   width: 20px;
   height: 20px;
   border: 2px solid white;
-  background: black;
   margin-top: 4px;
 }
 
 .checkbox:checked + .custom-checkbox {
   background: green;
    border: none;
+  background-image: url("../src/assets/img/Path.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
